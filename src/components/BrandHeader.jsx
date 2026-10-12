@@ -1,5 +1,4 @@
 import React from 'react'
-import { ArrowRight } from 'lucide-react'
 
 export function BrandHeader() {
   return (
@@ -29,16 +28,11 @@ export function BrandHeader() {
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <a
-          href="https://www.linkedin.com/in/ravada-hemanth-248622330/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-wider px-4 py-1.5 rounded-full bg-transparent text-[#00f0ff] border border-[#00f0ff]/40 hover:bg-[#00f0ff] hover:text-[#050811] hover:shadow-[0_0_16px_rgba(0,240,255,0.6)] transition-all cursor-pointer"
-        >
-          <span>LET'S BUILD</span>
-          <ArrowRight size={12} />
-        </a>
+      <div className="flex items-center gap-2.5 text-xs font-mono text-white/50">
+        <span className="text-[10px] tracking-widest uppercase hidden sm:inline">
+          EXPERIENCE STAGE
+        </span>
+        <span className="w-2 h-2 rounded-full bg-[#00f0ff] animate-pulse" />
       </div>
     </header>
   )

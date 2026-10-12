@@ -429,21 +429,14 @@ export function RoadScene({ prefersReducedMotion }) {
 
             <div
               ref={arrivalCtaRef}
-              className="absolute bottom-4 z-30 hidden opacity-0 flex-col items-center text-center gap-3"
+              className="absolute bottom-4 z-30 hidden opacity-0 flex-col items-center text-center gap-2"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#ccff00]/10 border border-[#ccff00]/30 shadow-[0_0_20px_rgba(204,255,0,0.3)]">
                 <span className="w-2 h-2 rounded-full bg-[#ccff00] animate-ping" />
                 <span className="text-xs font-mono font-bold tracking-widest text-[#ccff00] uppercase">
                   100% JOURNEY COMPLETE
                 </span>
               </div>
-              <a
-                href="#closing"
-                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#00f0ff] text-[#030712] font-mono text-xs font-black uppercase tracking-widest hover:bg-[#ccff00] hover:shadow-[0_0_24px_rgba(204,255,0,0.8)] transition-all cursor-pointer"
-              >
-                <span>LET'S BUILD TOGETHER</span>
-                <ArrowRight size={14} />
-              </a>
             </div>
           </div>
         </div>
