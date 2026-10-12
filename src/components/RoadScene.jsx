@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { CarModel } from './CarModel'
 import { MetricCard } from './MetricCard'
 import { METRICS_DATA } from '../data/metrics'
-import { ArrowDown, ArrowRight, Gauge } from 'lucide-react'
+import { ArrowDown, Gauge } from 'lucide-react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,11 +24,14 @@ export function RoadScene({ prefersReducedMotion }) {
   const trailPathRef = useRef(null)
   const carWrapperRef = useRef(null)
 
-  const stageHeadingsRef = useRef([])
-  const metricsContainerRef = useRef(null)
-  const arrivalCtaRef = useRef(null)
-  const speedRef = useRef(null)
+  const headlineRef = useRef(null)
+  const sublineRef = useRef(null)
+  const badgeRef = useRef(null)
   const cueRef = useRef(null)
+  const speedRef = useRef(null)
+  const progressTextRef = useRef(null)
+  const roadTextRef = useRef(null)
+  const arrivalBadgeRef = useRef(null)
 
   const cardRefs = useRef([])
   const numberRefs = useRef([])
@@ -38,7 +41,7 @@ export function RoadScene({ prefersReducedMotion }) {
   useEffect(() => {
     if (prefersReducedMotion) {
       if (trailPathRef.current) trailPathRef.current.style.strokeDashoffset = '0'
-      if (metricsContainerRef.current) metricsContainerRef.current.style.opacity = '1'
+      if (headlineRef.current) headlineRef.current.style.opacity = '1'
       cardRefs.current.forEach((c) => {
         if (c) c.style.opacity = '1'
       })
@@ -55,13 +58,36 @@ export function RoadScene({ prefersReducedMotion }) {
     }
 
     const ctx = gsap.context(() => {
-      const introTl = gsap.timeline({ defaults: { ease: 'power3.out' } })
-      introTl.from(cueRef.current, {
+      const loadTl = gsap.timeline({ defaults: { ease: 'power3.out' } })
+
+      loadTl.from(badgeRef.current, {
         opacity: 0,
-        y: 12,
-        duration: 0.8,
-        delay: 0.4,
+        y: -12,
+        duration: 0.6,
+        delay: 0.1,
       })
+      .from(headlineRef.current, {
+        opacity: 0,
+        y: 28,
+        duration: 0.85,
+      }, '-=0.4')
+      .from(sublineRef.current, {
+        opacity: 0,
+        y: 16,
+        duration: 0.65,
+      }, '-=0.5')
+      .from(cardRefs.current, {
+        opacity: 0,
+        y: 22,
+        scale: 0.94,
+        duration: 0.6,
+        stagger: 0.14,
+      }, '-=0.4')
+      .from(cueRef.current, {
+        opacity: 0,
+        y: 10,
+        duration: 0.5,
+      }, '-=0.3')
 
       const updateCarPosition = (progress) => {
         const clampedProgress = Math.min(Math.max(progress, 0), 1)
@@ -88,11 +114,25 @@ export function RoadScene({ prefersReducedMotion }) {
           trailPathRef.current.style.strokeDashoffset = `${offset}`
         }
 
-        if (clampedProgress < 0.22) {
+        if (progressTextRef.current) {
+          progressTextRef.current.textContent = `${Math.round(clampedProgress * 100)}%`
+        }
+
+        if (roadTextRef.current) {
+          if (clampedProgress > 0.35) {
+            roadTextRef.current.style.opacity = '1'
+            roadTextRef.current.style.filter = 'drop-shadow(0 0 12px rgba(0, 240, 255, 0.8))'
+          } else {
+            roadTextRef.current.style.opacity = `${0.4 + clampedProgress * 1.5}`
+            roadTextRef.current.style.filter = 'none'
+          }
+        }
+
+        if (clampedProgress < 0.25) {
           setActiveStageIndex(0)
-        } else if (clampedProgress < 0.50) {
+        } else if (clampedProgress < 0.52) {
           setActiveStageIndex(1)
-        } else if (clampedProgress < 0.80) {
+        } else if (clampedProgress < 0.82) {
           setActiveStageIndex(2)
         } else {
           setActiveStageIndex(3)
@@ -137,60 +177,10 @@ export function RoadScene({ prefersReducedMotion }) {
       masterTl.to(cueRef.current, { opacity: 0, y: -10, duration: 0.05 }, 0)
 
       masterTl.fromTo(
-        stageHeadingsRef.current[0],
-        { opacity: 1, y: 0, display: 'block' },
-        { opacity: 0, y: -18, display: 'none', duration: 0.06, ease: 'power2.in' },
-        0.18
-      )
-
-      masterTl.fromTo(
-        stageHeadingsRef.current[1],
-        { opacity: 0, y: 18, display: 'none' },
-        { opacity: 1, y: 0, display: 'block', duration: 0.06, ease: 'power2.out' },
-        0.26
-      )
-      masterTl.to(
-        stageHeadingsRef.current[1],
-        { opacity: 0, y: -18, display: 'none', duration: 0.06, ease: 'power2.in' },
-        0.46
-      )
-
-      masterTl.fromTo(
-        stageHeadingsRef.current[2],
-        { opacity: 0, y: 18, display: 'none' },
-        { opacity: 1, y: 0, display: 'block', duration: 0.06, ease: 'power2.out' },
-        0.54
-      )
-      masterTl.to(
-        stageHeadingsRef.current[2],
-        { opacity: 0, y: -18, display: 'none', duration: 0.06, ease: 'power2.in' },
-        0.76
-      )
-
-      masterTl.fromTo(
-        stageHeadingsRef.current[3],
-        { opacity: 0, y: 18, display: 'none' },
-        { opacity: 1, y: 0, display: 'block', duration: 0.06, ease: 'power2.out' },
+        arrivalBadgeRef.current,
+        { opacity: 0, y: 15, display: 'none' },
+        { opacity: 1, y: 0, display: 'flex', duration: 0.1, ease: 'power2.out' },
         0.84
-      )
-
-      masterTl.fromTo(
-        metricsContainerRef.current,
-        { opacity: 0, y: 30, display: 'none' },
-        { opacity: 1, y: 0, display: 'flex', duration: 0.08, ease: 'power2.out' },
-        0.52
-      )
-      masterTl.to(
-        metricsContainerRef.current,
-        { opacity: 0, y: -20, display: 'none', duration: 0.06, ease: 'power2.in' },
-        0.79
-      )
-
-      masterTl.fromTo(
-        arrivalCtaRef.current,
-        { opacity: 0, y: 20, display: 'none' },
-        { opacity: 1, y: 0, display: 'flex', duration: 0.08, ease: 'power2.out' },
-        0.85
       )
     }, containerRef)
 
@@ -211,63 +201,57 @@ export function RoadScene({ prefersReducedMotion }) {
     <section
       ref={containerRef}
       id="journey"
-      className="relative w-full h-[360vh] bg-[#030712] text-white"
+      className="relative w-full h-[340vh] bg-[#030712] text-white"
     >
       <div
         ref={trackRef}
-        className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between pt-20 pb-6 px-6 md:px-12 bg-[#030712] select-none"
+        className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between pt-16 pb-4 px-4 sm:px-6 md:px-12 bg-[#030712] select-none"
       >
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           aria-hidden="true"
         >
-          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#00f0ff]/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#ccff00]/10 rounded-full blur-[140px]" />
+          <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-[#00f0ff]/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 right-1/4 w-[450px] h-[450px] bg-[#ccff00]/10 rounded-full blur-[140px]" />
         </div>
 
-        <div className="relative z-30 w-full flex items-start justify-between text-xs font-mono">
-          <div className="flex flex-col gap-1">
-            <div className="flex items-center gap-2 text-white/50">
-              <span className="text-[#00f0ff] font-bold">
-                {activeStage.code}
-              </span>
-              <span>/</span>
-              <span>04</span>
-            </div>
-            <span className="text-sm font-black tracking-widest text-white uppercase">
-              {activeStage.stageName}
+        <div className="relative z-30 w-full max-w-6xl mx-auto flex flex-col items-center text-center">
+          <div ref={badgeRef} className="flex items-center gap-2 mb-1">
+            <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-[#00f0ff]">
+              ITZFIZZ DIGITAL // {activeStage.code} {activeStage.stageName}
             </span>
-            <span className="text-[10px] text-white/40 tracking-wider">
-              17.3850° N, 78.4867° E
-            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-ping" />
           </div>
 
-          <div className="flex flex-col items-center min-h-[50px] justify-center px-4">
-            {MILESTONES.map((m, idx) => (
-              <div
-                key={m.id}
-                ref={(el) => (stageHeadingsRef.current[idx] = el)}
-                className={`text-center ${idx === 0 ? 'block opacity-100' : 'hidden opacity-0'}`}
-              >
-                <span className="text-[9px] font-mono tracking-[0.3em] uppercase text-[#00f0ff] block mb-0.5">
-                  PHASE {m.code}
-                </span>
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,240,255,0.4)]">
-                  {m.desc}
-                </h2>
-              </div>
+          <h1
+            ref={headlineRef}
+            className="headline-text text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black uppercase text-white tracking-[0.35em] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] leading-tight"
+            aria-label="WELCOME ITZFIZZ"
+          >
+            W E L C O M E &nbsp; I T Z F I Z Z
+          </h1>
+
+          <p
+            ref={sublineRef}
+            className="mt-1 text-xs sm:text-sm text-white/65 max-w-xl mx-auto tracking-wide"
+          >
+            Digital experiences designed to move ideas forward.
+          </p>
+
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 md:gap-5 w-full">
+            {METRICS_DATA.map((metric, idx) => (
+              <MetricCard
+                key={metric.id}
+                metric={metric}
+                cardRef={(el) => (cardRefs.current[idx] = el)}
+                numberRef={(el) => (numberRefs.current[idx] = el)}
+              />
             ))}
-          </div>
-
-          <div className="flex flex-col items-end gap-1 text-right text-[10px] text-white/50 tracking-widest uppercase">
-            <span>IDEAS</span>
-            <span>TECHNOLOGY</span>
-            <span>IMPACT</span>
           </div>
         </div>
 
         <div className="relative z-20 w-full my-auto flex items-center justify-center">
-          <div className="relative w-full max-w-7xl h-[340px] sm:h-[420px] md:h-[480px] flex items-center justify-center">
+          <div className="relative w-full max-w-7xl h-[260px] sm:h-[320px] md:h-[380px] lg:h-[420px] flex items-center justify-center">
             <svg
               viewBox="0 0 1440 680"
               className="absolute inset-0 w-full h-full preserve-3d overflow-visible"
@@ -301,7 +285,7 @@ export function RoadScene({ prefersReducedMotion }) {
                 </filter>
               </defs>
 
-              <g opacity="0.09" stroke="#00f0ff" strokeWidth="1" fill="none">
+              <g opacity="0.08" stroke="#00f0ff" strokeWidth="1" fill="none">
                 <ellipse cx="260" cy="330" rx="200" ry="100" />
                 <ellipse cx="260" cy="330" rx="280" ry="140" />
                 <ellipse cx="760" cy="400" rx="240" ry="120" />
@@ -376,12 +360,13 @@ export function RoadScene({ prefersReducedMotion }) {
               />
 
               <text
+                ref={roadTextRef}
                 fill="#ffffff"
                 fontSize="24"
                 fontFamily="'Space Grotesk', 'Plus Jakarta Sans', sans-serif"
                 fontWeight="900"
                 letterSpacing="0.32em"
-                className="select-none pointer-events-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]"
+                className="select-none pointer-events-none drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] transition-all duration-300"
               >
                 <textPath
                   href="#headlineRoadGuideline"
@@ -414,24 +399,10 @@ export function RoadScene({ prefersReducedMotion }) {
             </svg>
 
             <div
-              ref={metricsContainerRef}
-              className="absolute bottom-0 left-0 right-0 z-30 hidden opacity-0 flex-wrap items-center justify-center gap-3 sm:gap-4 pointer-events-auto"
+              ref={arrivalBadgeRef}
+              className="absolute bottom-2 z-30 hidden opacity-0 flex-col items-center text-center pointer-events-none"
             >
-              {METRICS_DATA.map((metric, idx) => (
-                <MetricCard
-                  key={metric.id}
-                  metric={metric}
-                  cardRef={(el) => (cardRefs.current[idx] = el)}
-                  numberRef={(el) => (numberRefs.current[idx] = el)}
-                />
-              ))}
-            </div>
-
-            <div
-              ref={arrivalCtaRef}
-              className="absolute bottom-4 z-30 hidden opacity-0 flex-col items-center text-center gap-2"
-            >
-              <div className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#ccff00]/10 border border-[#ccff00]/30 shadow-[0_0_20px_rgba(204,255,0,0.3)]">
+              <div className="flex items-center gap-2 px-6 py-2 rounded-full bg-[#ccff00]/10 border border-[#ccff00]/30 shadow-[0_0_20px_rgba(204,255,0,0.3)]">
                 <span className="w-2 h-2 rounded-full bg-[#ccff00] animate-ping" />
                 <span className="text-xs font-mono font-bold tracking-widest text-[#ccff00] uppercase">
                   100% JOURNEY COMPLETE
@@ -441,14 +412,14 @@ export function RoadScene({ prefersReducedMotion }) {
           </div>
         </div>
 
-        <div className="relative z-30 w-full flex items-end justify-between text-xs font-mono border-t border-white/10 pt-3">
-          <div className="flex items-center gap-6">
+        <div className="relative z-30 w-full flex items-end justify-between text-xs font-mono border-t border-white/10 pt-2.5">
+          <div className="flex items-center gap-5 sm:gap-7">
             {MILESTONES.map((m, idx) => {
               const isActive = idx === activeStageIndex
               return (
-                <div key={m.id} className="flex flex-col gap-1 items-start">
-                  <div className="flex items-center gap-2">
-                    <span className={`w-2.5 h-2.5 rounded-full border transition-all ${
+                <div key={m.id} className="flex flex-col gap-0.5 items-start">
+                  <div className="flex items-center gap-1.5">
+                    <span className={`w-2 h-2 rounded-full border transition-all ${
                       isActive
                         ? 'bg-[#00f0ff] border-[#00f0ff] shadow-[0_0_8px_#00f0ff]'
                         : 'bg-transparent border-white/20'
@@ -469,11 +440,18 @@ export function RoadScene({ prefersReducedMotion }) {
             })}
           </div>
 
-          <div className="flex items-center gap-6 text-white/50">
+          <div className="flex items-center gap-5 text-white/50">
             <div className="flex items-center gap-2">
               <Gauge size={13} className="text-[#00f0ff]" />
               <span ref={speedRef} className="font-bold text-white bg-white/5 px-2 py-0.5 rounded border border-white/10">
                 0 KM/H
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1.5 text-white/50">
+              <span className="text-[10px]">STAGE</span>
+              <span ref={progressTextRef} className="font-bold text-[#ccff00]">
+                0%
               </span>
             </div>
 
@@ -483,8 +461,8 @@ export function RoadScene({ prefersReducedMotion }) {
             </div>
 
             <div className="hidden sm:flex flex-col text-right text-[9px] text-white/40 leading-tight">
-              <span>KINETIC SYSTEMS</span>
-              <span>FOR A BRIGHTER TOMORROW</span>
+              <span>ITZFIZZ DIGITAL</span>
+              <span>SCROLL ANIMATION</span>
             </div>
           </div>
         </div>
