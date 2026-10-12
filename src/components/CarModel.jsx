@@ -1,27 +1,27 @@
 import React from 'react'
 
-export function CarModel({ width = 120, height = 58, className = '' }) {
+export function CarModel({ width = 130, height = 62, className = '' }) {
   return (
     <div
       className={`relative select-none pointer-events-none will-change-transform ${className}`}
       style={{ width, height }}
     >
       <div
-        className="absolute -right-10 top-1/2 -translate-y-1/2 w-16 h-12 bg-[#00f0ff]/30 rounded-full blur-md pointer-events-none"
+        className="absolute -right-12 top-1/2 -translate-y-1/2 w-20 h-14 bg-[#00f0ff]/35 rounded-full blur-md pointer-events-none"
         aria-hidden="true"
       />
       <div
-        className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 bg-[#00f0ff]/20 rounded-full blur-md pointer-events-none"
+        className="absolute -left-12 top-1/2 -translate-y-1/2 w-16 h-8 bg-[#00f0ff]/40 rounded-full blur-sm pointer-events-none"
         aria-hidden="true"
       />
 
       <svg
-        viewBox="0 0 240 116"
+        viewBox="0 0 260 116"
         width={width}
         height={height}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]"
+        className="w-full h-full drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)]"
       >
         <defs>
           <linearGradient id="silverBody" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -39,61 +39,69 @@ export function CarModel({ width = 120, height = 58, className = '' }) {
           </linearGradient>
 
           <linearGradient id="headlightBeam" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.8" />
+            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#00f0ff" stop-opacity="0" />
+          </linearGradient>
+
+          <linearGradient id="thrusterBeam" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.9" />
             <stop offset="100%" stop-color="#00f0ff" stop-opacity="0" />
           </linearGradient>
 
           <filter id="neonGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#00f0ff" flood-opacity="0.8" />
+            <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#00f0ff" flood-opacity="0.85" />
           </filter>
         </defs>
 
-        <rect x="42" y="4" width="28" height="10" rx="2" fill="#090d16" />
-        <rect x="170" y="4" width="28" height="10" rx="2" fill="#090d16" />
-        <rect x="42" y="102" width="28" height="10" rx="2" fill="#090d16" />
-        <rect x="170" y="102" width="28" height="10" rx="2" fill="#090d16" />
+        <path d="M 32 46 L -10 38 L 8 48 Z" fill="url(#thrusterBeam)" />
+        <path d="M 32 70 L -10 78 L 8 68 Z" fill="url(#thrusterBeam)" />
+
+        <rect x="58" y="4" width="28" height="10" rx="2" fill="#090d16" />
+        <rect x="186" y="4" width="28" height="10" rx="2" fill="#090d16" />
+        <rect x="58" y="102" width="28" height="10" rx="2" fill="#090d16" />
+        <rect x="186" y="102" width="28" height="10" rx="2" fill="#090d16" />
 
         <path
-          d="M 16 48 C 14 52 14 64 16 68 L 24 72 L 23 80 C 23 84 27 88 34 88 L 44 88 L 48 94 C 52 100 60 102 70 102 L 86 102 C 94 102 102 98 106 94 L 130 92 L 160 96 C 172 98 182 104 194 104 L 210 104 C 220 104 228 98 232 90 L 236 78 C 238 72 239 65 239 58 C 239 51 238 44 236 38 L 232 26 C 228 18 220 12 210 12 L 194 12 C 182 12 172 18 160 20 L 130 24 L 106 22 C 102 18 94 14 86 14 L 70 14 C 60 14 52 16 48 22 L 44 28 L 34 28 C 27 28 23 32 23 36 L 24 44 Z"
+          d="M 32 48 C 30 52 30 64 32 68 L 40 72 L 39 80 C 39 84 43 88 50 88 L 60 88 L 64 94 C 68 100 76 102 86 102 L 102 102 C 110 102 118 98 122 94 L 146 92 L 176 96 C 188 98 198 104 210 104 L 226 104 C 236 104 244 98 248 90 L 252 78 C 254 72 255 65 255 58 C 255 51 254 44 252 38 L 248 26 C 244 18 236 12 226 12 L 210 12 C 198 12 188 18 176 20 L 146 24 L 122 22 C 118 18 110 14 102 14 L 86 14 C 76 14 68 16 64 22 L 60 28 L 50 28 C 43 28 39 32 39 36 L 40 44 Z"
           fill="url(#silverBody)"
         />
 
         <path
-          d="M 78 34 C 98 30 156 30 180 35 C 196 39 206 48 210 58 C 206 68 196 77 180 81 C 156 86 98 86 78 82 C 68 78 62 68 62 58 C 62 48 68 38 78 34 Z"
+          d="M 94 34 C 114 30 172 30 196 35 C 212 39 222 48 226 58 C 222 68 212 77 196 81 C 172 86 114 86 94 82 C 84 78 78 68 78 58 C 78 48 84 38 94 34 Z"
           fill="url(#cockpitGlass)"
           stroke="#0284c7"
           stroke-width="1"
         />
 
         <path
-          d="M 96 36 C 114 34 150 34 168 37 C 158 43 132 46 106 44 Z"
+          d="M 112 36 C 130 34 166 34 184 37 C 174 43 148 46 122 44 Z"
           fill="#ffffff"
           fill-opacity="0.25"
         />
 
         <path
-          d="M 160 38 C 175 41 184 48 188 58 C 184 68 175 75 160 78 L 152 58 Z"
+          d="M 176 38 C 191 41 200 48 204 58 C 200 68 191 75 176 78 L 168 58 Z"
           fill="#020617"
           fill-opacity="0.9"
         />
 
         <path
-          d="M 216 32 C 224 34 230 40 234 46 L 230 48 C 226 44 220 40 214 38 Z"
+          d="M 232 32 C 240 34 246 40 250 46 L 246 48 C 242 44 236 40 230 38 Z"
           fill="#00f0ff"
           filter="url(#neonGlow)"
         />
         <path
-          d="M 216 84 C 224 82 230 76 234 70 L 230 68 C 226 72 220 76 214 78 Z"
+          d="M 232 84 C 240 82 246 76 250 70 L 246 68 C 242 72 236 76 230 78 Z"
           fill="#00f0ff"
           filter="url(#neonGlow)"
         />
 
-        <line x1="18" y1="46" x2="18" y2="70" stroke="#f43f5e" stroke-width="2.5" />
-        <circle cx="16" cy="52" r="2" fill="#00f0ff" />
-        <circle cx="16" cy="64" r="2" fill="#00f0ff" />
+        <line x1="34" y1="46" x2="34" y2="70" stroke="#f43f5e" stroke-width="2.5" />
+        <circle cx="32" cy="52" r="2.5" fill="#00f0ff" />
+        <circle cx="32" cy="64" r="2.5" fill="#00f0ff" />
 
-        <path d="M 235 44 L 280 20 L 280 48 Z" fill="url(#headlightBeam)" />
-        <path d="M 235 72 L 280 96 L 280 68 Z" fill="url(#headlightBeam)" />
+        <path d="M 251 44 L 290 20 L 290 48 Z" fill="url(#headlightBeam)" />
+        <path d="M 251 72 L 290 96 L 290 68 Z" fill="url(#headlightBeam)" />
       </svg>
     </div>
   )

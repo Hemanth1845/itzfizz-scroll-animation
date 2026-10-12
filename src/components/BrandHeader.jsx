@@ -1,8 +1,9 @@
 import React from 'react'
+import { ArrowRight } from 'lucide-react'
 
 export function BrandHeader() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 backdrop-blur-md bg-[#050811]/85 border-b border-[#00f0ff]/10">
+    <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 backdrop-blur-md bg-[#050811]/80 border-b border-[#00f0ff]/10">
       <div className="flex items-center gap-3">
         <a href="#hero" className="flex items-center gap-2 group">
           <span className="text-base md:text-lg font-black tracking-[0.2em] text-white">
@@ -18,11 +19,11 @@ export function BrandHeader() {
 
         <span className="hidden sm:inline-block w-px h-3.5 bg-white/20" aria-hidden="true" />
 
-        <div className="hidden sm:flex items-center gap-1.5">
+        <div className="hidden sm:flex items-center gap-2">
           <span className="text-[10px] font-mono tracking-widest text-[#94a3b8] uppercase">
-            KINETIC SYSTEMS
+            DIGITAL EXPERIENCES
           </span>
-          <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/20">
+          <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/25 font-bold">
             ITZFIZZ
           </span>
         </div>
@@ -30,7 +31,7 @@ export function BrandHeader() {
 
       <nav aria-label="Primary navigation" className="flex items-center gap-6 md:gap-8">
         <div className="hidden md:flex items-center gap-6 text-xs font-mono tracking-widest text-[#94a3b8]">
-          <a href="#hero" className="text-white hover:text-[#00f0ff] transition-colors">
+          <a href="#hero" className="text-white hover:text-[#00f0ff] transition-colors border-b-2 border-[#00f0ff] pb-0.5">
             HOME
           </a>
           <a href="#journey" className="hover:text-[#00f0ff] transition-colors">
@@ -46,9 +47,10 @@ export function BrandHeader() {
 
         <a
           href="#closing"
-          className="text-[11px] font-mono font-bold tracking-wider px-3.5 py-1.5 rounded-full bg-[#00f0ff]/10 text-[#00f0ff] border border-[#00f0ff]/30 hover:bg-[#00f0ff] hover:text-black transition-all"
+          className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-wider px-4 py-1.5 rounded-full bg-transparent text-[#00f0ff] border border-[#00f0ff]/40 hover:bg-[#00f0ff] hover:text-[#050811] hover:shadow-[0_0_16px_rgba(0,240,255,0.6)] transition-all cursor-pointer"
         >
-          ENGAGE
+          <span>LET'S BUILD</span>
+          <ArrowRight size={12} />
         </a>
       </nav>
     </header>

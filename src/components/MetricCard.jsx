@@ -7,38 +7,38 @@ export function MetricCard({ metric, numberRef, cardRef }) {
   return (
     <div
       ref={cardRef}
-      className={`p-4 sm:p-5 rounded-2xl bg-[#070b14]/90 backdrop-blur-md border ${metric.accentBorder} shadow-[0_12px_32px_rgba(0,0,0,0.65)] flex flex-col gap-2 min-w-[170px] sm:min-w-[210px] md:min-w-[230px] transition-all duration-300 hover:scale-105 hover:border-[${accentColor}] group`}
+      className={`p-3 sm:p-4 rounded-xl bg-[#070b14]/90 backdrop-blur-md border ${metric.accentBorder} shadow-[0_8px_24px_rgba(0,0,0,0.6)] flex flex-col gap-1.5 w-[140px] sm:w-[170px] md:w-[190px] lg:w-[210px] transition-transform duration-300 hover:scale-105`}
     >
-      <div className="flex items-center justify-between gap-2">
-        <span className={`text-[9px] sm:text-[10px] font-mono font-bold tracking-widest px-2 py-0.5 rounded-full ${metric.badgeBg}`}>
+      <div className="flex items-center justify-between gap-1">
+        <span className={`text-[8px] sm:text-[9px] font-mono font-bold tracking-widest px-1.5 py-0.5 rounded-full ${metric.badgeBg}`}>
           {metric.category}
         </span>
         <span
-          className="w-1.5 h-1.5 rounded-full animate-ping"
-          style={{ backgroundColor: accentColor }}
+          className="w-1.5 h-1.5 rounded-full"
+          style={{ backgroundColor: accentColor, boxShadow: `0 0 6px ${accentColor}` }}
         />
       </div>
 
-      <div className="flex items-baseline gap-1 mt-1">
+      <div className="flex items-baseline gap-1">
         <span
           ref={numberRef}
-          className="metric-number text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-none text-white drop-shadow-[0_2px_12px_rgba(0,240,255,0.3)]"
+          className="metric-number text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-none text-white drop-shadow-[0_2px_12px_rgba(0,240,255,0.3)]"
         >
           {metric.prefix}{metric.value}{metric.suffix}
         </span>
       </div>
 
-      <p className="text-xs sm:text-sm font-medium text-[#94a3b8] leading-snug">
+      <p className="text-[10px] sm:text-xs font-medium text-[#94a3b8] leading-tight line-clamp-2">
         {metric.label}
       </p>
 
-      <div className="w-full h-0.5 bg-white/5 rounded-full overflow-hidden mt-1">
+      <div className="w-full h-0.5 bg-white/10 rounded-full overflow-hidden mt-0.5">
         <div
-          className="h-full rounded-full transition-all duration-500"
+          className="h-full rounded-full"
           style={{
-            width: `${Math.min(metric.value * 1.4, 100)}%`,
+            width: `${Math.min(metric.value * 1.5, 100)}%`,
             backgroundColor: accentColor,
-            boxShadow: `0 0 8px ${accentColor}`,
+            boxShadow: `0 0 6px ${accentColor}`,
           }}
         />
       </div>
