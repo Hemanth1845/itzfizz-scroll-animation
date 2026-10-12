@@ -29,30 +29,17 @@ export function BrandHeader() {
         </div>
       </div>
 
-      <nav aria-label="Primary navigation" className="flex items-center gap-6 md:gap-8">
-        <div className="hidden md:flex items-center gap-6 text-xs font-mono tracking-widest text-[#94a3b8]">
-          <a href="#hero" className="text-white hover:text-[#00f0ff] transition-colors border-b-2 border-[#00f0ff] pb-0.5">
-            HOME
-          </a>
-          <a href="#journey" className="hover:text-[#00f0ff] transition-colors">
-            WORK
-          </a>
-          <a href="#closing" className="hover:text-[#00f0ff] transition-colors">
-            ABOUT
-          </a>
-          <a href="#closing" className="hover:text-[#00f0ff] transition-colors">
-            CONTACT
-          </a>
-        </div>
-
+      <div className="flex items-center gap-4">
         <a
-          href="#closing"
+          href="https://www.linkedin.com/in/ravada-hemanth-248622330/"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-wider px-4 py-1.5 rounded-full bg-transparent text-[#00f0ff] border border-[#00f0ff]/40 hover:bg-[#00f0ff] hover:text-[#050811] hover:shadow-[0_0_16px_rgba(0,240,255,0.6)] transition-all cursor-pointer"
         >
           <span>LET'S BUILD</span>
           <ArrowRight size={12} />
         </a>
-      </nav>
+      </div>
     </header>
   )
 }

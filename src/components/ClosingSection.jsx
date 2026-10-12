@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowRight, Code, Cpu, Sparkles, Terminal } from 'lucide-react'
+import { ArrowRight, Cpu, Sparkles, Terminal } from 'lucide-react'
 
 export function ClosingSection() {
   return (
@@ -69,7 +69,9 @@ export function ClosingSection() {
           </p>
 
           <a
-            href="mailto:hemanthravada100@gmail.com"
+            href="https://www.linkedin.com/in/ravada-hemanth-248622330/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#00f0ff] text-[#050811] font-mono text-xs font-black uppercase tracking-widest hover:bg-[#ccff00] hover:shadow-[0_0_30px_rgba(0,240,255,0.7)] transition-all cursor-pointer"
           >
             <span>CONNECT WITH HEMANTH</span>
