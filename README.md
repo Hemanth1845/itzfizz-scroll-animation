@@ -199,3 +199,5 @@ The project is pre-configured for automated GitHub Pages deployment using GitHub
 
 - Telemetry velocity is derived from scroll delta speed; smooth trackpads or mice may display varying velocity spikes.
 - Path coordinates are optimized for wide aspect ratios and adapt responsively down to mobile viewports through SVG viewBox scaling.
+#   i t z f i z z - s c r o l l - a n i m a t i o n  
+ 
